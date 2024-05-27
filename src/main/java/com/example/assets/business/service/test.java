@@ -1,24 +1,31 @@
-﻿package com.example.assets.business.service;
+package com.example.assets.business.service;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.example.assets.business.entiity.BillStatus;
 import com.example.assets.business.entiity.TestUser;
 import com.example.assets.util.Cryptography;
+import com.google.common.collect.Lists;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * TODO
+ *
+ * @author GengTianMing
+ * @since 2024/05/27 16:23
+ **/
 public class test {
-    public void main(String[] args) {
-        String body="{\"billPageNo\":0,\"billPageSize\":10,\"endAt\":\"2021-05-02 18:25:12\",\"startAt\":\"2021-05-02 18:20:12\",\"stkId\":\"1272\"}";
-
+    public static void main(String[] args) {
+//        String body = "{\"billPageNo\":0,\"billPageSize\":10,\"endAt\":\"2021-05-02 18:25:12\",\"startAt\":\"2021-05-02 18:20:12\",\"stkId\":\"1272\"}";
+//
 //        System.out.println(body);
-
-        String name = BillStatus.getStatusName("4");
-//        System.out.println("name\t"+ name);
+//
+//        String name = BillStatus.getStatusName("4");
+//        System.out.println("name\t" + name);
 
         List<TestUser> userList = new ArrayList<>();
         TestUser testUser1 = new TestUser("101", "张三", "pw001", "M", "138001", 20, 70.00, new Date());
@@ -27,29 +34,40 @@ public class test {
         TestUser testUser4 = new TestUser("104", "刘六", "pw004", "F", "138003", 27, 72.00, new Date());
         TestUser testUser5 = new TestUser("105", "钱七", "pw005", "F", "138003", 20, 80.00, new Date());
         userList.add(testUser1);
-//        userList.add(testUser2);
-//        userList.add(testUser3);
-//        userList.add(testUser4);
-//        userList.add(testUser5);
+        userList.add(testUser2);
+        userList.add(testUser3);
+        userList.add(testUser4);
+        userList.add(testUser5);
 
-        List<String> txtList = new ArrayList<>();
-        for (TestUser t : userList) {
-            txtList.add(t.getUserid() + "-" + t.getUserName());
-        }
+        List<TestUser> userList2 = new ArrayList<>();
+        userList2.add(new TestUser("201", "张三", "pw001", "M", "138001", 20, 70.00, new Date()));
+        userList2.add(new TestUser("202", "张三", "pw001", "M", "138001", 20, 70.00, new Date()));
+        userList2.add(new TestUser("203", "张三", "pw001", "M", "138001", 20, 70.00, new Date()));
+        userList2.add(new TestUser("204", "张三", "pw001", "M", "138001", 20, 70.00, new Date()));
+        userList2.add(new TestUser("205", "张三", "pw001", "M", "138001", 20, 70.00, new Date()));
 
+        List<TestUser> userListS = Lists.newArrayList(CollUtil.union(userList, userList2));
+        System.out.println("userListS1:" + CollUtil.union(userList, userList2));
+        System.out.println("userListS2:" + userListS);
+
+
+//        List<String> txtList = new ArrayList<>();
+//        for (TestUser t : userList) {
+//            txtList.add(t.getUserid() + "-" + t.getUserName());
+//        }
+
+//        Integer m = 7;
+//        Integer n = 7;
 //        System.out.println("isequle:" + isequle(m, n));
 
 
-
-
-
-
-//        List<TestUser> slist = userList.stream().sorted().collect(Collectors.toList());
+        List<TestUser> slist = userList.stream().sorted(Comparator.comparing(TestUser::getAge)).collect(Collectors.toList());
+        System.out.println("slist\n" + JSONObject.toJSONString(slist, SerializerFeature.PrettyFormat,
+                SerializerFeature.WriteDateUseDateFormat));
 
 
         System.out.println("----------使用stream和sort--weight默认升序----------");
         List<TestUser> sortList1 = userList.stream().sorted((a, b) -> a.getWeight().compareTo(b.getWeight())).collect(Collectors.toList());
-//        sortList1.stream().forEach(s-> System.out.println(s.getWeight()));
 
         System.out.println("sortList1\n" + JSONObject.toJSONString(sortList1, SerializerFeature.PrettyFormat,
                 SerializerFeature.WriteDateUseDateFormat));
@@ -59,8 +77,8 @@ public class test {
         System.out.println("sortList2\n" + JSON.toJSONString(sortList2));
 
         System.out.println("----------不使用stream和sort--升序----------");
-        // 使用集合的sort排序，集合自身排序发生变化
-        userList.sort((a,b)->a.getWeight().compareTo(b.getWeight()));
+//         使用集合的sort排序，集合自身排序发生变化
+        userList.sort((a, b) -> a.getWeight().compareTo(b.getWeight()));
         System.out.println("sortList3\n" + JSON.toJSONString(userList));
 
         System.out.println("----------使用stream和sort--weight默认升序----------");
@@ -75,7 +93,7 @@ public class test {
                 .thenComparing(TestUser::getAge, Comparator.reverseOrder())
                 .thenComparing(TestUser::getUserid));
 
-//        sortList4.stream().forEach(x -> x.setUserid(null));
+        sortList4.stream().forEach(x -> x.setUserid(null));
 
         String jsontext = JSON.toJSONString(sortList4);
         System.out.println("jsontext\n" + jsontext);
@@ -100,11 +118,7 @@ public class test {
         System.out.println("Cryptography\t" + Cryptography.encryptToMD5("1"));
 
 
-
 //, Feature.OrderedField
-
-
-
 
 
 //        List<TestUser> orderUser = userList.stream().sorted(Comparator.reverseOrder()).stream().sorted(Comparator.reverseOrder());
@@ -151,9 +165,6 @@ public class test {
 //            System.out.println("tmap_k:\t" + k);
 //            System.out.println("tmap_v:\n" + v);
 //        });
-
-
-
 
 
 //        Map<TestUser.getSex, Double> averageAgeByGender = userList.stream()
@@ -240,8 +251,12 @@ public class test {
 ////        map.put("label", label);
 //        return map;
 //    }
-//
-//    public Boolean isequle(Integer a, Integer b){
-//        return a.equals(b);
+
     }
+
+    public static  Boolean isequle(Integer t1, Integer t2){
+        return t1.equals(t2);
+    }
+
+
 }
