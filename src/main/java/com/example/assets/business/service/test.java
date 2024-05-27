@@ -8,7 +8,6 @@ import com.example.assets.business.entiity.BillStatus;
 import com.example.assets.business.entiity.TestUser;
 import com.example.assets.util.Cryptography;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -179,46 +178,46 @@ public class test {
 //                .collect(Collectors.toCollection(JSONArray::new));
 
 
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        //如：获取当前时间60秒以后的时间：
-        Date oldTime = new Date(); //获取当前时间
-        Long changeValue = 60L;
-        Date newTime =new Date(oldTime.getTime() + 1000L * changeValue);
-        String firstString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(newTime);
-        System.out.println("OldTime:\t" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(oldTime));
-        System.out.println("NewTime:\t" + firstString);
-
-        // 创建一个当前的Date对象
-        Date currentDate = new Date();
-
-        // 将Date对象转换为毫秒级时间戳
-        long millisTimestamp = currentDate.getTime();
-
-        // 将毫秒级时间戳转换为秒级时间戳
-        long secondsTimestamp = millisTimestamp / 1000;
-
-        // 为了再次转换为Date，我们需要将秒级时间戳转回为毫秒级时间戳
-        long millisTimestampAgain = secondsTimestamp * 1000;
-
-        // 使用转换后的毫秒级时间戳创建一个新的Date对象
-        Date dateFromTimestamp = new Date(millisTimestampAgain);
-
-        // 输出原始Date和从时间戳转换回来的Date
-        System.out.println("原始Date: " + sdf.format(currentDate));
-        System.out.println("从秒级时间戳转换回来的Date: " + sdf.format(dateFromTimestamp));
-
-
-
-
-        long time = 30 * 60 * 1000;//30分钟
-
-        Date afterDate = new Date(oldTime.getTime() + time);//30分钟后的时间
-        Date beforeDate = new Date(oldTime.getTime() - time);//30分钟前的时间
-        System.out.println("当前的时间    :\t" + sdf.format(oldTime));
-        System.out.println("30分钟前的时间:\t" + sdf.format(beforeDate));
-        System.out.println("30分钟后的时间:\t" + sdf.format(afterDate ));
-    }
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+//        //如：获取当前时间60秒以后的时间：
+//        Date oldTime = new Date(); //获取当前时间
+//        Long changeValue = 60L;
+//        Date newTime =new Date(oldTime.getTime() + 1000L * changeValue);
+//        String firstString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(newTime);
+//        System.out.println("OldTime:\t" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(oldTime));
+//        System.out.println("NewTime:\t" + firstString);
+//
+//        // 创建一个当前的Date对象
+//        Date currentDate = new Date();
+//
+//        // 将Date对象转换为毫秒级时间戳
+//        long millisTimestamp = currentDate.getTime();
+//
+//        // 将毫秒级时间戳转换为秒级时间戳
+//        long secondsTimestamp = millisTimestamp / 1000;
+//
+//        // 为了再次转换为Date，我们需要将秒级时间戳转回为毫秒级时间戳
+//        long millisTimestampAgain = secondsTimestamp * 1000;
+//
+//        // 使用转换后的毫秒级时间戳创建一个新的Date对象
+//        Date dateFromTimestamp = new Date(millisTimestampAgain);
+//
+//        // 输出原始Date和从时间戳转换回来的Date
+//        System.out.println("原始Date: " + sdf.format(currentDate));
+//        System.out.println("从秒级时间戳转换回来的Date: " + sdf.format(dateFromTimestamp));
+//
+//
+//
+//
+//        long time = 30 * 60 * 1000;//30分钟
+//
+//        Date afterDate = new Date(oldTime.getTime() + time);//30分钟后的时间
+//        Date beforeDate = new Date(oldTime.getTime() - time);//30分钟前的时间
+//        System.out.println("当前的时间    :\t" + sdf.format(oldTime));
+//        System.out.println("30分钟前的时间:\t" + sdf.format(beforeDate));
+//        System.out.println("30分钟后的时间:\t" + sdf.format(afterDate ));
+//    }
 
 //    public Date getChangeTime(Date nowTime,Long changeValue)
 //    {
@@ -244,5 +243,5 @@ public class test {
 //
 //    public Boolean isequle(Integer a, Integer b){
 //        return a.equals(b);
-//    }
+    }
 }
