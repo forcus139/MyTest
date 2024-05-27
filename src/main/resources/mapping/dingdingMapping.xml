@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    CREATE TABLE `hr_dingding_attendance` (
+    `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `attendance_id` bigint(11) NOT NULL COMMENT '打卡ID',
+    `source_type` varchar(20) DEFAULT '' COMMENT '数据来源：ATM：考勤机打卡（指纹/人脸打卡）BEACON：IBeacon DING_ATM：钉钉考勤机（考勤机蓝牙打卡） USER：用户打卡 BOSS：老板改签 APPROVE：审批系统 SYSTEM：考勤系统 AUTO_CHECK：自动打卡',
+    `base_check_time` datetime DEFAULT NULL COMMENT '计算迟到和早退，基准时间。',
+    `user_check_time` datetime DEFAULT NULL COMMENT '实际打卡时间, 用户打卡时间的毫秒数。',
+    `proc_inst_id` varchar(36) DEFAULT NULL COMMENT '关联的审批实例ID，当该字段非空时，表示打卡记录与请假、加班等审批有关。',
+    `approve_id` bigint(11) DEFAULT NULL COMMENT '关联的审批ID，当该字段非空时，表示打卡记录与请假、加班等审批有关。',
+    `location_result` varchar(20) DEFAULT NULL COMMENT '位置结果： Normal：范围内 Outside：范围外 NotSigned：未打卡',
+    `time_result` varchar(20) DEFAULT NULL COMMENT '打卡结果： Normal：正常 Early：早退 Late：迟到 SeriousLate：严重迟到 Absenteeism：旷工迟到 NotSigned：未打卡',
+    `check_type` varchar(20) DEFAULT NULL COMMENT '考勤类型： OnDuty：上班 OffDuty：下班',
+    `user_id` varchar(36) DEFAULT NULL COMMENT '打卡人的UserID。',
+    `work_date` datetime DEFAULT NULL COMMENT '工作日。',
+    `record_id` bigint(11) DEFAULT NULL COMMENT '打卡记录ID。',
+    `plan_id` bigint(11) DEFAULT NULL COMMENT '排班ID。',
+    `group_id` bigint(11) DEFAULT NULL COMMENT '考勤组ID。',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+    ) COMMENT='钉钉打开记录';
+
+
+    CREATE TABLE `hr_dingding_user` (
+    `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `userid` varchar(36) DEFAULT NULL COMMENT '用户的userid。',
+    `unionid` varchar(36) DEFAULT NULL COMMENT '用户在当前开发者企业账号范围内的唯一标识。',
+    `name` varchar(50) DEFAULT NULL COMMENT '用户姓名。',
+    `avatar` varchar(255) DEFAULT NULL COMMENT '头像地址。',
+    `state_code` varchar(10) DEFAULT NULL COMMENT '国际电话区号。',
+    `mobile` varchar(20) DEFAULT NULL COMMENT '手机号码。',
+    `hide_mobile` varchar(10) DEFAULT NULL COMMENT '是否号码隐藏：true：隐藏  false：不隐藏',
+    `telephone` varchar(20) DEFAULT NULL COMMENT '分机号。',
+    `job_number` varchar(10) DEFAULT NULL COMMENT '员工工号。',
+    `title` varchar(20) DEFAULT NULL COMMENT '职位。',
+    `email` varchar(50) DEFAULT NULL COMMENT '员工邮箱。',
+    `org_email` varchar(50) DEFAULT NULL COMMENT '员工的企业邮箱。',
+    `work_place` varchar(255) DEFAULT NULL COMMENT '办公地点。',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注。',
+    `dept_id_list` varchar(200) DEFAULT NULL COMMENT '所属部门ID列表。',
+    `extension` varchar(255) DEFAULT NULL COMMENT '扩展属性。',
+    `admin` varchar(10) DEFAULT NULL COMMENT '是否为企业的管理员：true：是  false：不是',
+    `boss` varchar(10) DEFAULT NULL COMMENT '是否为企业的老板：true：是  false：不是',
+    `leader` varchar(10) DEFAULT NULL COMMENT '是否是部门的主管：true：是  false：不是',
+    `hired_date` datetime DEFAULT NULL COMMENT '入职时间，单位毫秒。',
+    `exclusive_account` varchar(10) DEFAULT NULL COMMENT '是否专属帐号：true：是 false：不是',
+    `login_id` varchar(50) DEFAULT NULL COMMENT '专属帐号登录名。',
+    `exclusive_account_type` varchar(10) DEFAULT NULL COMMENT '专属帐号类型：sso：企业自建专属帐号  dingtalk：钉钉自建专属帐号',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+    ) COMMENT='钉钉用户信息';
+
+
+
+    CREATE TABLE `hr_dingding_dept` (
+    `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `dept_id` bigint(11) DEFAULT NULL COMMENT '部门ID。',
+    `name` varchar(50) DEFAULT NULL COMMENT '部门名称。',
+    `parent_id` bigint(11) DEFAULT NULL COMMENT '父部门ID。',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+    ) COMMENT='钉钉部门表';
+
+
+
+    CREATE TABLE `hr_dingding_process` (
+    `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `process_instance_id` varchar(50) DEFAULT NULL COMMENT '流程实例标识。',
+    `process_code` varchar(100) DEFAULT NULL COMMENT '审批流的唯一码。',
+    `title` varchar(200) DEFAULT NULL COMMENT '审批实例标题。',
+    `create_time` datetime DEFAULT NULL COMMENT '开始时间',
+    `finish_time` datetime DEFAULT NULL COMMENT '结束时间。',
+    `originator_userid` varchar(36) DEFAULT NULL COMMENT '发起人的userid。',
+    `originator_dept_id` bigint(11) DEFAULT NULL COMMENT '发起人的部门。-1表示根部门。',
+    `originator_dept_name` varchar(50) DEFAULT NULL COMMENT '发起部门。',
+    `status` varchar(20) DEFAULT NULL COMMENT '审批状态：NEW：新创建 RUNNING：审批中 TERMINATED：被终止 COMPLETED：完成 CANCELED：取消',
+    `result` varchar(10) DEFAULT NULL COMMENT '审批结果：agree：同意 refuse：拒绝',
+    `business_id` varchar(36) DEFAULT NULL COMMENT '审批实例业务编号。',
+    `biz_action` varchar(10) DEFAULT NULL COMMENT '审批实例业务动作：MODIFY：表示该审批实例是基于原来的实例修改而来  REVOKE：表示该审批实例是由原来的实例撤销后重新发起的  NONE表示正常发起',
+    `main_process_instance_id` varchar(50) DEFAULT NULL COMMENT '主流程实例标识。',
+    `form_component_values` text COMMENT '表单详情列表。',
+    `operation_records` text COMMENT '操作记录列表。',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+    ) COMMENT='钉钉流程表';
+
+</beans>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.assets.base.mapper.DaoSysCode">
+
+    <!--插入操作-->
+    <insert id="insert_syscode" parameterType="com.example.assets.base.entity.SysCode">
+        insert into s_syscode(syscode, levels, parentcode, descr, isvisible, ismodify, notes,
+                        createuser, createtime, updateuser, updatetime, remark, ifstatus, wide_by)
+        values(#{syscode}, #{levels}, #{parentcode}, #{descr}, #{isvisible}, #{ismodify}, #{notes},
+               #{createuser}, #{createtime}, #{updateuser}, #{updatetime}, #{remark}, #{ifstatus}, #{wide_by})
+    </insert>
+
+    <!--删除操作-->
+    <delete id="delete_syscode" parameterType="com.example.assets.base.entity.SysCode">
+        delete from s_syscode where parentcode = #{parentcode} and syscode = #{syscode}
+    </delete>
+
+    <!--修改操作-->
+    <update id="update_syscode" parameterType="com.example.assets.base.entity.SysCode">
+        update s_syscode
+        set   levels = #{levels},
+              descr = #{descr},
+              isvisible = #{isvisible},
+              ismodify = #{ismodify},
+              notes = #{notes},
+              updateuser = #{updateuser},
+              updatetime = #{updatetime},
+              remark = #{remark},
+              ifstatus = #{ifstatus},
+              wide_by = #{wide_by}
+        where parentcode = #{parentcode} and syscode = #{syscode}
+    </update>
+
+    <select id="select_syscode" resultType="com.example.assets.base.entity.SysCode">
+        select * from s_syscode where parentcode = #{parentcode} and syscode = #{syscode}
+    </select>
+
+    <select id="select_parentcode" resultType="com.example.assets.base.entity.SysCode">
+        select * from s_syscode where parentcode = #{parentcode}
+    </select>
+
+    <select id="select_all" resultType="com.example.assets.base.entity.SysCode">
+        select * from s_syscode
+    </select>
+
+    <select id="cardqrcodenew" parameterType="java.util.HashMap" statementType="CALLABLE">
+        {call CARDQRCODENEW(
+                #{p_channel,mode=IN,jdbcType=VARCHAR},
+                #{p_cdmno,mode=IN,jdbcType=VARCHAR},
+                #{p_cdmowner,mode=IN,jdbcType=VARCHAR},
+                #{p_cqroper,mode=IN,jdbcType=VARCHAR},
+                #{p_cqroperdate,mode=IN,jdbcType=VARCHAR},
+                #{r_rtncode,mode=OUT,jdbcType=INTEGER},
+                #{r_rtnmsg,mode=OUT,jdbcType=VARCHAR},
+                #{r_qrcode,mode=OUT,jdbcType=VARCHAR}
+            )
+            }
+    </select>
+
+</mapper>
+

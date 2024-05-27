@@ -1,0 +1,34 @@
+1676274876653|-1||debug||com.p6spy.engine.common.P6SpyOptions reloading properties
+03:54:36,656|-1||info||Using properties file: E:\CAI\JAVA\assets\target\classes\spy.properties
+03:54:36,656|-1||info||No value in environment for: getStackTrace, using: false
+03:54:36,656|-1||info||No value in environment for: getFilter, using: false
+03:54:36,656|-1||info||No value in environment for: getAppender, using: com.uxun.utils.P6SpyLogger
+03:54:36,656|-1||info||No value in environment for: getInclude, using: null
+03:54:36,656|-1||info||No value in environment for: getDeregisterDrivers, using: false
+03:54:36,656|-1||info||No value in environment for: getJNDIContextProviderURL, using: null
+03:54:36,656|-1||info||No value in environment for: getJNDIContextCustom, using: null
+03:54:36,656|-1||info||No value in environment for: getRealDataSource, using: null
+03:54:36,656|-1||info||No value in environment for: getReloadProperties, using: false
+03:54:36,656|-1||info||No value in environment for: getExecutionThreshold, using: 0
+03:54:36,656|-1||info||No value in environment for: getStackTraceClass, using: null
+03:54:36,656|-1||info||No value in environment for: getExcludecategories, using: info,debug,result,batch
+03:54:36,656|-1||info||No value in environment for: getReloadPropertiesInterval, using: 60
+03:54:36,656|-1||info||No value in environment for: getIncludecategories, using: null
+03:54:36,656|-1||info||No value in environment for: getStringMatcherEngine, using: com.p6spy.engine.common.SubstringMatcher@681c0ae6
+03:54:36,656|-1||info||No value in environment for: getJNDIContextFactory, using: null
+03:54:36,656|-1||info||No value in environment for: getRealDataSourceProperties, using: null
+03:54:36,656|-1||info||No value in environment for: getRealDataSourceClass, using: null
+03:54:36,656|-1||info||No value in environment for: getUsePrefix, using: false
+03:54:36,656|-1||info||No value in environment for: getAutoflush, using: true
+03:54:36,657|-1||info||No value in environment for: getRealdriver2, using: null
+03:54:36,657|-1||info||No value in environment for: getLogfile, using: spy.log
+03:54:36,657|-1||info||No value in environment for: getDateformatter, using: java.text.SimpleDateFormat@188b59c7
+03:54:36,657|-1||info||No value in environment for: getRealdriver, using: com.microsoft.sqlserver.jdbc.SQLServerDriver
+03:54:36,657|-1||info||No value in environment for: getSQLExpression, using: null
+03:54:36,657|-1||info||No value in environment for: getAppend, using: true
+03:54:36,657|-1||info||No value in environment for: getSpydriver, using: com.p6spy.engine.spy.P6SpyDriver
+03:54:36,657|-1||info||No value in environment for: getDateformat, using: hh:mm:ss,SSS
+03:54:36,657|-1||info||No value in environment for: getRealdriver3, using: null
+03:54:36,657|-1||info||No value in environment for: getStringmatcher, using: com.p6spy.engine.common.SubstringMatcher
+03:54:36,657|-1||info||No value in environment for: getExclude, using: null
+03:54:36,694|-1||error||driver com.microsoft.sqlserver.jdbc.SQLServerDriver is a real driver in spy.properties, but it has been loaded before p6spy.  p6spy will not wrap these connections.  Either prevent the driver from loading, or try setting 'deregisterdrivers' to true in spy.properties

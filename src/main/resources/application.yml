@@ -1,0 +1,151 @@
+server:
+  port: 10010
+
+# sa-token配置
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: satoken
+  # token有效期，单位s 默认30天, -1代表永不过期
+  timeout: 2592000
+  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  activity-timeout: -1
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: true
+  # token风格
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: false
+
+#spring.datasource.druid.url: jdbc:oracle:thin:192.168.11.60:1521:ftcard
+#spring.datasource.druid.username: dbusrcard001
+#spring.datasource.druid.password: futurecard
+#spring.datasource.druid.initial-size: 5
+#spring.datasource.druid.max-active: 20
+#spring.datasource.druid.min-idle: 10
+#spring.datasource.druid.max-wait: 10
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  profiles:
+    active: dev
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  datasource:
+
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver   # com.p6spy.engine.spy.P6SpyDriver
+#   driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://221.2.155.89:4333;DatabaseName=zygk_uat;integratedSecurity=false;
+    username: wmpos
+    password: runningsoftdevelopment
+
+    ## oracle.jdbc.OracleDriver      oracle.jdbc.driver.OracleDriver  ?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+#    url: jdbc:oracle:thin:@//192.168.11.60:1521/ftcard
+#    username: dbusrcard001
+#    password: futurecard
+#    type: com.alibaba.druid.pool.DruidDataSource # 自定义数据源
+#
+    #Spring Boot 默认是不注入这些属性值的，需要自己绑定
+    #druid 数据源专有配置
+#    initialSize: 5
+#    minIdle: 5
+#    maxActive: 20
+#    maxWait: 60000
+#    timeBetweenEvictionRunsMillis: 60000
+#    minEvictableIdleTimeMillis: 300000
+#    validationQuery: SELECT 1 FROM DUAL
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    poolPreparedStatements: true
+
+#    # 连接池启动时创建的初始化连接数量
+#    initialSize: 20
+#
+#    # 连接池中可同时连接的最大连接数量
+#    maxActive: 20
+#
+#    # 连接池中最大的空闲连接数量，超过的空闲连接将被释放，设置为负数表示不限制
+#    maxIdle: 8
+#
+#    # 连接池中最小的空闲连接数量，低于这个数量将创建新的连接
+#    minIdle: 5
+#
+#    # 最大等待时间，当没有可用连接时，连接池等待连接释放的最大时间
+#    maxWait: 10000
+#
+#    # 是否在归还到池中进行检验
+#    testOnReturn: false
+#
+#    # 校验语句，必须是查询语句，至少查询一列，设置了它onBorrow才会生效
+#    validationQuery: select 1 from dual
+#
+#    # 连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,
+#    # 则连接将被从池中去除.设置为true后如果要生效,validationQuery参数必须设置为非空字符串
+#    testWhileIdle: true
+#
+#    # 从池中取出连接时完成校验 ，验证不通过销毁这个connection，默认为true，
+#    testOnBorrow: false
+#
+#    # 每30秒运行一次空闲连接回收器
+#    timeBetweenEvictionRunsMillis: 30000
+#
+#    # 连接在池中保持空闲而不被空闲连接回收器线程
+#    # (如果有)回收的最小时间值，单位毫秒
+#    minEvictableIdleTimeMillis: 1800000
+#
+#    #在每次空闲连接回收器线程(如果有)运行时检查的连接数量
+#    numTestsPerEvictionRun: 3
+#
+#    # 校验查询时长，如果超过，认为校验失败
+#    validationQueryTimeout: 1
+#
+#    # 设置是否自动提交
+#    defaultAutoCommit: flase
+##
+##    connection-timeout: 30000
+
+
+
+#    type: com.zaxxer.hikari.HikariDataSource
+#    hikari:
+#      minimum-idle: 5
+#      maximum-pool-size: 20
+#      auto-commit: true
+#      idle-timeout: 30000
+#      pool-name: zedHikariCP
+#      max-lifetime: 1800000
+#      connection-timeout: 30000
+#      connection-test-query: SELECT 1
+
+
+#    static String driverClass="oracle.jdbc.driver.OracleDriver"; //oracle的驱动
+#    static String url="jdbc:oracle:thin:@localhost:1521:orcl";// port sid
+#    static String user="A201805550101";   //user是数据库的用户名
+#    static String password="123456";  //用户登录密码
+
+mybatis-plus:
+  mapper-locations: classpath*:mapping/**/*Mapper.xml   # classpath*:mapping/**/*Mapper.xml   classpath:mapping/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  type-aliases-package: com.yuepong.demo.user.infrastructure.persistent.po
+
+
+logging:
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+  #    path: "./logs/"
+  #    file.max-size: 10MB
+  level:
+    root: INFO
+    com.zaxxer.hikari: warn
+    com.zed.datamanager.dao: debug #SQL显示

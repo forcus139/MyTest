@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--    配置数据源环境-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+                <property name="url" value="jdbc:sqlserver://221.2.155.89:4333;DatabaseName=ljzygk622;integratedSecurity=false;"/>
+                <property name="username" value="wmpos"/>
+                <property name="password" value="runningsoftdevelopment"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--加载映射文件，然后只用调用这个核心文件就可以调用映射文件了-->
+    <mappers>
+        <mapper resource="mapping/UserMapping.xml"></mapper>
+    </mappers>
+
+</configuration>
