@@ -9,8 +9,6 @@ import com.example.assets.business.entiity.TestUser;
 import com.example.assets.util.Cryptography;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -222,20 +220,20 @@ public class test {
         System.out.println("30分钟后的时间:\t" + sdf.format(afterDate ));
     }
 
-    public Date getChangeTime(Date nowTime,Long changeValue)
-    {
-        //nowTime=基础时间,将在此时间上做加减
-        //changeValue=时间变换量，如changeValue=60,则获取[基础时间]60秒后的时间
-        //如 changeValue=-60 ,则获取[基础时间]60秒前的时间
-        Date newTime =new Date(nowTime.getTime()+ 1000L * changeValue);
-        return newTime;
-    }
-
-    public LocalDateTime DateToLocalDateTime(Date locTime) {
-        String firstString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(locTime);
-        LocalDateTime firstTime = LocalDateTime.parse(firstString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        return firstTime;
-    }
+//    public Date getChangeTime(Date nowTime,Long changeValue)
+//    {
+//        //nowTime=基础时间,将在此时间上做加减
+//        //changeValue=时间变换量，如changeValue=60,则获取[基础时间]60秒后的时间
+//        //如 changeValue=-60 ,则获取[基础时间]60秒前的时间
+//        Date newTime =new Date(nowTime.getTime()+ 1000L * changeValue);
+//        return newTime;
+//    }
+//
+//    public LocalDateTime DateToLocalDateTime(Date locTime) {
+//        String firstString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(locTime);
+//        LocalDateTime firstTime = LocalDateTime.parse(firstString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+//        return firstTime;
+//    }
 
 //    public HashMap<String, String> toMapLabelValue(String value, String column) {
 //        HashMap<String, String> map = new HashMap();
