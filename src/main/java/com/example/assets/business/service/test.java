@@ -9,6 +9,8 @@ import com.example.assets.business.entiity.TestUser;
 import com.example.assets.util.Cryptography;
 import com.google.common.collect.Lists;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -47,9 +49,29 @@ public class test {
         userList2.add(new TestUser("205", "张三", "pw001", "M", "138001", 20, 70.00, new Date()));
 
         List<TestUser> userListS = Lists.newArrayList(CollUtil.union(userList, userList2));
-        System.out.println("userListS1:" + CollUtil.union(userList, userList2));
-        System.out.println("userListS2:" + userListS);
-        System.out.println("userListS3:" + userListS.stream().map(TestUser::getAge).collect(Collectors.toSet()));
+//        System.out.println("userListS1:" + CollUtil.union(userList, userList2));
+//        System.out.println("userListS2:" + userListS);
+//        System.out.println("userListS3:" + userListS.stream().map(TestUser::getAge).collect(Collectors.toSet()));
+
+        String tmp = " 1000-优讯龙腾总部, 7001-优讯龙腾一门店, 7002-优讯龙腾二门店, 7003-优讯龙腾三门店, 7004-优讯龙腾四门店, 7005-优讯龙腾五门店, 7006-优调龙腾六门店, 9001-配送中心1, 9002-配送中心2";
+        List<String> orgList = Arrays.asList(tmp.split(","));
+        System.out.println("orgList:"  + orgList.size() + " --> "+ orgList);
+
+        // 获取当前日期
+        LocalDate currentDate = LocalDate.now();
+
+        // 定义日期格式，只包含年和月，且月份为两位数
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMM");
+
+        // 格式化日期为字符串
+        String formattedDate = currentDate.format(formatter);
+
+        // 将字符串转换为整型
+        int yearMonthAsInt = Integer.parseInt(formattedDate);
+
+        // 输出结果
+        System.out.println("格式化后的日期字符串: " + formattedDate);
+        System.out.println("转换为整型后的年月: " + yearMonthAsInt);
 
 
 //        List<String> txtList = new ArrayList<>();
