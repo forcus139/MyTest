@@ -49,6 +49,7 @@ public class test {
         List<TestUser> userListS = Lists.newArrayList(CollUtil.union(userList, userList2));
         System.out.println("userListS1:" + CollUtil.union(userList, userList2));
         System.out.println("userListS2:" + userListS);
+        System.out.println("userListS3:" + userListS.stream().map(TestUser::getAge).collect(Collectors.toSet()));
 
 
 //        List<String> txtList = new ArrayList<>();
